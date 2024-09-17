@@ -1,8 +1,9 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ristoply_app/data/dummy_data.dart';
+// import 'package:ristoply_app/widgets/statistiche/bar_chart.dart';
 import 'package:ristoply_app/widgets/statistiche/date_picker.dart';
+import 'package:ristoply_app/widgets/statistiche/elenco_spese.dart';
 import 'package:ristoply_app/widgets/statistiche/pie_chart.dart';
 
 class Statistiche extends StatefulWidget {
@@ -17,15 +18,26 @@ class Statistiche extends StatefulWidget {
 class _StatisticheState extends State<Statistiche> {
   DateTime currentDate = DateTime.now();
 
+  int selectedRadioTile = 1;
+
+  setSelectedRadioTile(int value) {
+    setState(() {
+      selectedRadioTile = value;
+    });
+  }
+
   void show() {
     showModalBottomSheet(
       context: context,
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(15))),
       builder: (BuildContext context) {
         return Container(
-          padding: const EdgeInsets.only(top: 30, left: 24, right: 24),
-          height: 272, // Set your desired height
+          height: MediaQuery.of(context).size.height * 0.3,
+          padding: const EdgeInsets.only(left: 24, right: 24),
           child: Center(
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
@@ -39,11 +51,14 @@ class _StatisticheState extends State<Statistiche> {
                     ),
                   ),
                 ),
-                SizedBox(height: 20,),
-                TextButton(
-                  child: Row(
-                    children: [
-                      Text(
+                const SizedBox(
+                  height: 20,
+                ),
+                ListView(
+                  shrinkWrap: true,
+                  children: [
+                    RadioListTile(
+                      title: Text(
                         "Mese",
                         style: GoogleFonts.getFont(
                           'DM Sans',
@@ -54,14 +69,16 @@ class _StatisticheState extends State<Statistiche> {
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                  onPressed: () {},
-                ),
-                TextButton(
-                  child: Row(
-                    children: [
-                      Text(
+                      activeColor: const Color.fromRGBO(39, 117, 104, 1),
+                      value: 1,
+                      groupValue: selectedRadioTile,
+                      onChanged: (value) {
+                        setSelectedRadioTile(value!);
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                    RadioListTile(
+                      title: Text(
                         "Anno",
                         style: GoogleFonts.getFont(
                           'DM Sans',
@@ -72,9 +89,15 @@ class _StatisticheState extends State<Statistiche> {
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                  onPressed: () {},
+                      activeColor: const Color.fromRGBO(39, 117, 104, 1),
+                      value: 2,
+                      groupValue: selectedRadioTile,
+                      onChanged: (value) {
+                        setSelectedRadioTile(value!);
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -107,68 +130,121 @@ class _StatisticheState extends State<Statistiche> {
         centerTitle: true,
         actions: [
           IconButton(
-              onPressed: () {}, icon: const Icon(Icons.bar_chart_outlined)),
+              onPressed: () {
+                //     Navigator.push(context, MaterialPageRoute(builder: (ctx) => const BarChart()),);
+              },
+              icon: const Icon(Icons.bar_chart_outlined)),
           IconButton(
               onPressed: show, icon: const Icon(Icons.calendar_month_outlined)),
         ],
       ),
-      body: Expanded(
-        child: Container(
-          color: const Color.fromRGBO(246, 246, 247, 1),
-          padding: const EdgeInsets.only(left: 24, right: 24),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
+      body: Container(
+        color: const Color.fromRGBO(246, 246, 247, 1),
+        padding: const EdgeInsets.only(left: 24, right: 24),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
 // Date picker
-                const SizedBox(height: 10),
-                DatePicker(),
+              const SizedBox(height: 10),
+              const DatePicker(),
 
 // Pie chart
-                const SizedBox(height: 10),
-                Container(
-                  child: PieChart(),
-                ),
-
-// Testo
-                const SizedBox(height: 20),
-                Container(
-                  color: const Color.fromRGBO(246, 246, 247, 1),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
+              const SizedBox(height: 10),
+              Column(
+                children: [
+                  const PieChart(),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.white,
+                    ),
+                    width: 350,
+                    padding: const EdgeInsets.only(bottom: 24),
+                    child: Column(children: [
                       Text(
-                        'Dettagli spese',
+                        'Spesa totale',
                         style: GoogleFonts.getFont(
                           'DM Sans',
                           textStyle: const TextStyle(
-                            color: Color.fromRGBO(11, 20, 52, 1),
-                            fontSize: 18,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        'Le percentuali in evidenza sono da considerarsi rispetto al mese precedente.',
-                        style: GoogleFonts.getFont(
-                          'DM Sans',
-                          textStyle: const TextStyle(
-                            color: Color.fromRGBO(1, 0, 13, 1),
+                            color: Color.fromRGBO(83, 90, 115, 1),
                             fontSize: 16,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
                       ),
-                    ],
+                      Text(
+                        '€ 3563,95',
+                        style: GoogleFonts.getFont(
+                          'DM Sans',
+                          textStyle: const TextStyle(
+                            color: Color.fromRGBO(1, 0, 13, 1),
+                            fontSize: 28,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        '58 ordini',
+                        style: GoogleFonts.getFont(
+                          'DM Sans',
+                          textStyle: const TextStyle(
+                            color: Color.fromRGBO(83, 90, 115, 1),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ),
+                    ]),
                   ),
-                ),
+
+// Testo
+                  const SizedBox(height: 20),
+                  Container(
+                    color: const Color.fromRGBO(246, 246, 247, 1),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Dettagli spese',
+                          style: GoogleFonts.getFont(
+                            'DM Sans',
+                            textStyle: const TextStyle(
+                              color: Color.fromRGBO(11, 20, 52, 1),
+                              fontSize: 18,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                        Text(
+                          'Le percentuali in evidenza sono da considerarsi rispetto al mese precedente.',
+                          style: GoogleFonts.getFont(
+                            'DM Sans',
+                            textStyle: const TextStyle(
+                              color: Color.fromRGBO(1, 0, 13, 1),
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
 
 // Elenco spese
-                const SizedBox(height: 10),
-                Container(),
-                const SizedBox(height: 10),
-              ],
-            ),
+                  const SizedBox(height: 10),
+            //      Container(),
+
+
+
+ElencoSpeseScreen(),
+
+
+
+                  const SizedBox(height: 10),
+                ],
+              ),
+            ],
           ),
         ),
       ),

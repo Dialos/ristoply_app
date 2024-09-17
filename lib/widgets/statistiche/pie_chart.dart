@@ -12,7 +12,7 @@ class PieChart extends StatelessWidget {
       color: Colors.white,
       margin: const EdgeInsets.only(top: 10),
       width: 350,
-      height: 320,
+      height: 350,
       child: Chart(
         data: pieData,
         variables: {
@@ -22,9 +22,9 @@ class PieChart extends StatelessWidget {
           'value': Variable(
             accessor: (Map map) => map['value'] as num,
           ),
-    //      'colore': Variable(
-      //      accessor: (Map map) => map['colore'] as Color,
-       //   ),
+          'colore': Variable(
+            accessor: (Map map) => map['colore'] as String,
+          ),
         },
         transforms: [
           Proportion(
@@ -38,9 +38,15 @@ class PieChart extends StatelessWidget {
             label: LabelEncode(
                 encoder: (tuple) => Label(
                       tuple['name'].toString(),
-                      LabelStyle(textStyle: Defaults.runeStyle),
+                      LabelStyle(
+                          textStyle: const TextStyle(
+                        fontSize: 10,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      )),
                     )),
-            color: ColorEncode(variable: 'name', values: Defaults.colors10),
+            color: ColorEncode(
+                variable: 'colore', values: colorType.values.toList()),
             modifiers: [StackModifier()],
           )
         ],

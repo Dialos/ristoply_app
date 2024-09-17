@@ -20,24 +20,25 @@ class _DatePickerState extends State<DatePicker> {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.topLeft,
-      color: Colors.white,
+      
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: Colors.white,),
       child: TextButton(
         child: Row(
-          children: [
-            Text(
-              DateFormat().add_yMMMM().format(_selected),
-              style: GoogleFonts.getFont(
-                'DM Sans',
-                textStyle: const TextStyle(
-                  color: Color.fromRGBO(1, 0, 13, 1),
-                  fontSize: 17,
-                  fontWeight: FontWeight.w700,
+            children: [
+              Text(
+                DateFormat().add_yMMMM().format(_selected),
+                style: GoogleFonts.getFont(
+                  'DM Sans',
+                  textStyle: const TextStyle(
+                    color: Color.fromRGBO(1, 0, 13, 1),
+                    fontSize: 17,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ),
-            ),
-            SizedBox(width: MediaQuery.of(context).size.width * 0.39,),
-            const Icon(Icons.keyboard_arrow_down_outlined),
-          ],
+              const Expanded(child: SizedBox()),
+              const Icon(Icons.keyboard_arrow_down_outlined),
+            ],
         ),
         onPressed: () async => _onPressed(context: context),
       ),
