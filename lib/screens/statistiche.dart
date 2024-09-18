@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ristoply_app/data/dummy_data.dart';
-// import 'package:ristoply_app/widgets/statistiche/bar_chart.dart';
+import 'package:ristoply_app/widgets/statistiche/bar_chart.dart';
 import 'package:ristoply_app/widgets/statistiche/date_picker.dart';
 // import 'package:ristoply_app/widgets/statistiche/elenco_spese.dart';
 import 'package:ristoply_app/widgets/statistiche/pie_chart.dart';
@@ -131,7 +131,7 @@ class _StatisticheState extends State<Statistiche> {
         actions: [
           IconButton(
               onPressed: () {
-                //     Navigator.push(context, MaterialPageRoute(builder: (ctx) => const BarChart()),);
+ Navigator.push(context, MaterialPageRoute(builder: (ctx) => const BarChart()),);
               },
               icon: const Icon(Icons.bar_chart_outlined)),
           IconButton(

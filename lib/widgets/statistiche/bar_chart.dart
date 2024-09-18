@@ -3,7 +3,6 @@ import 'package:graphic/graphic.dart';
 import 'package:ristoply_app/data/bar_data.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
 class BarChart extends StatefulWidget {
   const BarChart({super.key});
 
@@ -13,11 +12,23 @@ class BarChart extends StatefulWidget {
 
 class _BarChartState extends State<BarChart> {
   DateTime? _selectedDate = DateTime(DateTime.now().year, DateTime.now().month);
-  var dropMenuDate = DateTime.now().year.toString();
+
+int currentYear = DateTime.now().year;
+
+  List<int> getYears(int year) {
+    
+
+    List<int> dropYearList = [];
+    while (year <= currentYear) {
+      dropYearList.add(year);
+      year++;
+    }
+    return dropYearList;
+  }
 
   void _presentDatePicker() async {
     final now = DateTime.now();
-    final firstDate = DateTime(now.year, now.month, now.day);
+    final firstDate = DateTime(now.year);
     final pickedDate = await showDatePicker(
       context: context,
       initialDate: now,
@@ -29,27 +40,29 @@ class _BarChartState extends State<BarChart> {
     });
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          IconButton(
-            onPressed: _presentDatePicker,
-            icon: DropdownButton(
-              value: dropMenuDate, 
-              icon: const Icon(Icons.keyboard_arrow_down_outlined), 
-              items: barData.map((element) {
-                return DropdownMenuItem(value: element, child: Text(element.toString()),);
-              }).toList(),
-              onChanged: (newValue) {
-                setState(() {
-                  dropMenuDate = newValue;
-                });
-              },),
-          ),
+          // IconButton(
+          //   onPressed: _presentDatePicker,
+          //   icon: DropdownButton(
+          //     value: currentYear.toString(),
+          //     icon: const Icon(Icons.keyboard_arrow_down_outlined),
+          //     items: getYears(10).map((element) {
+          //       return DropdownMenuItem(
+          //         value: element,
+          //         child: Text(element.toString()),
+          //       );
+          //     }).toList(),
+          //     onChanged: (newValue) {
+          //       //        setState(() {
+          //       //        dropMenuDate = newValue;
+          //       //      });
+          //     },
+          //   ),
+          // ),
         ],
       ),
       body: SingleChildScrollView(
@@ -70,6 +83,21 @@ class _BarChartState extends State<BarChart> {
                 ),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.only(left: 25.0),
+              child: Text(
+                'Spesa totale',
+                style: GoogleFonts.getFont(
+                  'DM Sans',
+                  textStyle: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 10,),
             Container(
               padding: const EdgeInsets.only(left: 10, right: 10),
               width: MediaQuery.of(context).size.width * 1,
@@ -77,11 +105,11 @@ class _BarChartState extends State<BarChart> {
               child: Chart(
                 data: barData,
                 variables: {
-                  'Mese': Variable(
-                    accessor: (Map map) => map['Mese'] as String,
+                  'month': Variable(
+                    accessor: (Map map) => map['month'] as String,
                   ),
-                  'Importo': Variable(
-                    accessor: (Map map) => map['Importo'] as num,
+                  'sold': Variable(
+                    accessor: (Map map) => map['sold'] as num,
                   ),
                 },
                 marks: [
