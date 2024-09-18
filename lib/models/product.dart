@@ -53,10 +53,10 @@ class Categoria {
   final String icona;
 }
 
-class Spese {
+ // class Spese {
 
 
 
-final Categoria categoria;
-  final List<Fornitore> fornitore;
-}
+ //final Categoria categoria;
+ // final List<Fornitore> fornitore;
+// }

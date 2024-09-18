@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:ristoply_app/data/dummy_data.dart';
 // import 'package:ristoply_app/widgets/statistiche/bar_chart.dart';
 import 'package:ristoply_app/widgets/statistiche/date_picker.dart';
-import 'package:ristoply_app/widgets/statistiche/elenco_spese.dart';
+// import 'package:ristoply_app/widgets/statistiche/elenco_spese.dart';
 import 'package:ristoply_app/widgets/statistiche/pie_chart.dart';
 
 class Statistiche extends StatefulWidget {
@@ -237,7 +237,7 @@ class _StatisticheState extends State<Statistiche> {
 
 
 
-ElencoSpeseScreen(),
+// ElencoSpeseScreen(),
 
 
 

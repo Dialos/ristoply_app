@@ -9,6 +9,7 @@ class OrdiniWidgets extends StatelessWidget {
     return InkWell(
       onTap: () {},
       child: Container(
+        margin: const EdgeInsets.only(left: 24),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: Colors.white,
