@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:month_year_picker/month_year_picker.dart';
-import 'package:ristoply_app/screens/splash_screen.dart';
 
 import 'package:ristoply_app/screens/splash_screen.dart';
 import 'package:ristoply_app/screens/statistiche.dart';
@@ -18,13 +16,28 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      localizationsDelegates: [
+    return MaterialApp(
+      theme: ThemeData(
+        colorScheme:
+            const ColorScheme.light(primary: Color.fromRGBO(39, 117, 104, 1)),
+        datePickerTheme: const DatePickerThemeData(
+          backgroundColor: Colors.white,
+          dividerColor: Color.fromRGBO(39, 117, 104, 1),
+          headerBackgroundColor: Color.fromRGBO(39, 117, 104, 1),
+          headerForegroundColor: Colors.white,
+        ),
+      ),
+      localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
-        MonthYearPickerLocalizations.delegate
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
       ],
-      //   home: BottomTab(),
-      home: SplashScreen(),
+      supportedLocales: const [
+        Locale('en'),
+        Locale('it'),
+      ],
+     // home: const SplashScreen(),
+      home: const Statistiche(),
     );
   }
 }

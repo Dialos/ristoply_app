@@ -9,7 +9,10 @@ class PieChart extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(top: 20, bottom: 20),
-      color: Colors.white,
+      decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
+                      color: Colors.white,
+                    ),
       margin: const EdgeInsets.only(top: 10),
       width: 350,
       height: 350,

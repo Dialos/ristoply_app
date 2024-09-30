@@ -90,8 +90,8 @@ class ProfiloWidgets extends StatelessWidget {
               SizedBox(height: MediaQuery.of(context).size.height * 0.03),
               const Padding(
                 padding: EdgeInsets.only(
-                  left: 40,
-                  right: 40,
+                  left: 24,
+                  right: 24,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,

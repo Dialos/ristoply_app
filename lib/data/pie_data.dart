@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 const pieData = [
-  {'value': 3346, 'name': 'Carne', 'colore': 't1',},
+  {'value': 1000, 'name': 'Carne', 'colore': 't1',},
   {'value': 1457, 'name': 'Ittico', 'colore': 't2',},
   {'value': 2563, 'name': 'Ortofrutta', 'colore': 't3',},
   {'value': 3346, 'name': 'Beverage', 'colore': 't4',},

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ristoply_app/data/dummy_data.dart';
 import 'package:ristoply_app/widgets/statistiche/bar_chart.dart';
-import 'package:ristoply_app/widgets/statistiche/date_picker.dart';
 // import 'package:ristoply_app/widgets/statistiche/elenco_spese.dart';
 import 'package:ristoply_app/widgets/statistiche/pie_chart.dart';
+import 'package:ristoply_app/widgets/statistiche/pie_date_picker.dart';
 
 class Statistiche extends StatefulWidget {
   const Statistiche({super.key});
@@ -131,7 +131,10 @@ class _StatisticheState extends State<Statistiche> {
         actions: [
           IconButton(
               onPressed: () {
- Navigator.push(context, MaterialPageRoute(builder: (ctx) => const BarChart()),);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (ctx) => const BarChart()),
+                );
               },
               icon: const Icon(Icons.bar_chart_outlined)),
           IconButton(
@@ -147,7 +150,7 @@ class _StatisticheState extends State<Statistiche> {
             children: [
 // Date picker
               const SizedBox(height: 10),
-              const DatePicker(),
+              const PieDatePicker(),
 
 // Pie chart
               const SizedBox(height: 10),
@@ -155,8 +158,8 @@ class _StatisticheState extends State<Statistiche> {
                 children: [
                   const PieChart(),
                   Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.vertical(bottom: Radius.circular(10)),
                       color: Colors.white,
                     ),
                     width: 350,
@@ -233,13 +236,9 @@ class _StatisticheState extends State<Statistiche> {
 
 // Elenco spese
                   const SizedBox(height: 10),
-            //      Container(),
-
-
+                  //      Container(),
 
 // ElencoSpeseScreen(),
-
-
 
                   const SizedBox(height: 10),
                 ],

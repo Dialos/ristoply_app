@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:month_year_picker/month_year_picker.dart';
 import 'package:intl/intl.dart';
 
-class DatePicker extends StatefulWidget {
-  const DatePicker({super.key});
+class PieDatePicker extends StatefulWidget {
+  const PieDatePicker({super.key});
 
   @override
   State<StatefulWidget> createState() {
-    return _DatePickerState();
+    return _PieDatePickerState();
   }
 }
 
-class _DatePickerState extends State<DatePicker> {
+class _PieDatePickerState extends State<PieDatePicker> {
   DateTime _selected = DateTime.now();
 
   @override
@@ -27,7 +26,7 @@ class _DatePickerState extends State<DatePicker> {
         child: Row(
           children: [
             Text(
-              DateFormat().add_yMMMM().format(_selected),
+              DateFormat.yMMMM('it').format(_selected).toString().toCapitalized,
               style: GoogleFonts.getFont(
                 'DM Sans',
                 textStyle: const TextStyle(
@@ -38,7 +37,10 @@ class _DatePickerState extends State<DatePicker> {
               ),
             ),
             const Expanded(child: SizedBox()),
-            const Icon(Icons.keyboard_arrow_down_outlined),
+            const Icon(
+              Icons.keyboard_arrow_down_outlined,
+              color: Color.fromRGBO(45, 45, 45, 1),
+            ),
           ],
         ),
         onPressed: () async => _onPressed(context: context),
@@ -47,23 +49,27 @@ class _DatePickerState extends State<DatePicker> {
   }
 
   Future<void> _onPressed({required BuildContext context}) async {
-    final selected = await showMonthYearPicker(
+    DateTime? pickedDate = await showDatePicker(
       context: context,
-      initialDate: _selected,
-      firstDate: DateTime(2019),
-      lastDate: DateTime(2030),
-      builder: (context, child) {
-        return Theme(
-          data: ThemeData.dark(), // This will change to light theme.
-          child: child!,
-        );
-      },
+      initialEntryMode: DatePickerEntryMode.calendarOnly,
+      locale: const Locale('it'),
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000), // quanto voglio andare indietro
+      lastDate: DateTime.now(),
+      helpText: 'Seleziona una data',
+      cancelText: 'Chiudi',
     );
 
-    if (selected != null) {
+    if (pickedDate != null) {
       setState(() {
-        _selected = selected;
+        _selected = pickedDate;
       });
     }
   }
+}
+
+
+extension StringCasingExtension on String {
+  String get toCapitalized => length > 0 ?'${this[0].toUpperCase()}${substring(1).toLowerCase()}':'';
+  String get toTitleCase => replaceAll(RegExp(' +'), ' ').split(' ').map((str) => str.toCapitalized).join(' ');
 }
