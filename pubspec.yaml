@@ -40,6 +40,9 @@ dependencies:
   url_launcher: ^6.3.0
   flutter_localization: ^0.2.2
   intl: ^0.19.0
+  shared_preferences: ^2.3.2
+  flutter_localizations:
+    sdk: flutter
 
 dev_dependencies:
   flutter_test:
@@ -50,7 +53,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^3.0.0
+  flutter_lints: ^5.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -65,14 +68,15 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-   - assets_images/chef.png
-   - assets_images/logo_ristoply.png
-   - assets_images/onboarding1.png
-   - assets_images/onboarding2.png
-   - assets_images/onboarding3.png
-   - assets_images/login_background.jpeg
-   - assets_images/signin_background.png
-   - assets_images/recovery_background.jpeg
+   - assets/assets_images/chef.png
+   - assets/assets_images/logo_ristoply.png
+   - assets/assets_images/onboarding1.png
+   - assets/assets_images/onboarding2.png
+   - assets/assets_images/onboarding3.png
+   - assets/assets_images/login_background.jpeg
+   - assets/assets_images/signin_background.png
+   - assets/assets_images/recovery_background.jpeg
+   - assets/assets_file/json_ristoply_v1.json
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

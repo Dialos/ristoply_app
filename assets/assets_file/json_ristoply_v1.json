@@ -1,0 +1,398 @@
+{
+    "anni": [
+        {
+            "nomeAnno": 2023,
+            "mesi": [
+                {
+                    "nomeMese": "Gennaio",
+                    "categorie": [
+                        {
+                            "idCategoria": 2,
+                            "fornitori": [
+                                {
+                                    "nomeFornitore": "Il contadino",
+                                    "via": "Via della spiga, 1",
+                                    "cap": "20100",
+                                    "citta": "Milano",
+                                    "prodotti": [
+                                        {
+                                            "nomeProdotto": "Pomodori",
+                                            "codice": "0004",
+                                            "quantita": 1,
+                                            "prezzo": 3.99,
+                                            "udm": "kg"
+                                        },
+                                        {
+                                            "nomeProdotto": "Peperoni",
+                                            "codice": "0004",
+                                            "quantita": 1,
+                                            "prezzo": 4.99,
+                                            "udm": "kg"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "nomeFornitore": "L'agricoltore",
+                                    "via": "Via dei vigneti, 1",
+                                    "cap": "20100",
+                                    "citta": "Roma",
+                                    "prodotti": [
+                                        {
+                                            "nomeProdotto": "Mele",
+                                            "codice": "0004",
+                                            "quantita": 2,
+                                            "prezzo": 1.99,
+                                            "udm": "kg"
+                                        },
+                                        {
+                                            "nomeProdotto": "Pesche",
+                                            "codice": "0004",
+                                            "quantita": 3,
+                                            "prezzo": 0.97,
+                                            "udm": "kg"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "idCategoria": 1,
+                            "fornitori": [
+                                {
+                                    "nomeFornitore": "Il macellaio",
+                                    "via": "Via vai, 1",
+                                    "cap": "20100",
+                                    "citta": "Pavia",
+                                    "prodotti": [
+                                        {
+                                            "nomeProdotto": "Salsiccia",
+                                            "codice": "0004",
+                                            "quantita": 2,
+                                            "prezzo": 15,
+                                            "udm": "kg"
+                                        },
+                                        {
+                                            "nomeProdotto": "Petto di pollo",
+                                            "codice": "0004",
+                                            "quantita": 1,
+                                            "prezzo": 8,
+                                            "udm": "kg"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "nomeFornitore": "Dexter Morgan",
+                                    "via": "Via dei killer, 1",
+                                    "cap": "20100",
+                                    "citta": "Genova",
+                                    "prodotti": [
+                                        {
+                                            "nomeProdotto": "Braciola",
+                                            "codice": "0004",
+                                            "quantita": 2,
+                                            "prezzo": 6.99,
+                                            "udm": "kg"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "nomeMese": "Giugno",
+                    "categorie": [
+                        {
+                            "idCategoria": 3,
+                            "fornitori": [
+                                {
+                                    "nomeFornitore": "Il contadino",
+                                    "via": "Via della spiga, 1",
+                                    "cap": "20100",
+                                    "citta": "Milano",
+                                    "prodotti": [
+                                        {
+                                            "nomeProdotto": "Pomodori",
+                                            "codice": "0004",
+                                            "quantita": 3,
+                                            "prezzo": 6.99,
+                                            "udm": "kg"
+                                        },
+                                        {
+                                            "nomeProdotto": "Peperoni",
+                                            "codice": "0004",
+                                            "quantita": 5,
+                                            "prezzo": 12.99,
+                                            "udm": "kg"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "nomeFornitore": "L'agricoltore",
+                                    "via": "Via dei vigneti, 1",
+                                    "cap": "20100",
+                                    "citta": "Roma",
+                                    "prodotti": [
+                                        {
+                                            "nomeProdotto": "Mele",
+                                            "codice": "0004",
+                                            "quantita": 1,
+                                            "prezzo": 1.99,
+                                            "udm": "kg"
+                                        },
+                                        {
+                                            "nomeProdotto": "Pesche",
+                                            "codice": "0004",
+                                            "quantita": 2,
+                                            "prezzo": 0.97,
+                                            "udm": "kg"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "idCategoria": 1,
+                            "fornitori": [
+                                {
+                                    "nomeFornitore": "Il macellaio",
+                                    "via": "Via vai, 1",
+                                    "cap": "20100",
+                                    "citta": "Pavia",
+                                    "prodotti": [
+                                        {
+                                            "nomeProdotto": "Salsiccia",
+                                            "codice": "0004",
+                                            "quantita": 8,
+                                            "prezzo": 25,
+                                            "udm": "kg"
+                                        },
+                                        {
+                                            "nomeProdotto": "Petto di pollo",
+                                            "codice": "0004",
+                                            "quantita": 4,
+                                            "prezzo": 18,
+                                            "udm": "kg"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "nomeFornitore": "Dexter Morgan",
+                                    "via": "Via dei killer, 1",
+                                    "cap": "20100",
+                                    "citta": "Genova",
+                                    "prodotti": [
+                                        {
+                                            "nomeProdotto": "Braciola",
+                                            "codice": "0004",
+                                            "quantita": 2,
+                                            "prezzo": 6.99,
+                                            "udm": "kg"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "nomeAnno": 2024,
+            "mesi": [
+                {
+                    "nomeMese": "Febbraio",
+                    "categorie": [
+                        {
+                            "idCategoria": 2,
+                            "fornitori": [
+                                {
+                                    "nomeFornitore": "Il contadino",
+                                    "via": "Via della spiga, 1",
+                                    "cap": "20100",
+                                    "citta": "Milano",
+                                    "prodotti": [
+                                        {
+                                            "nomeProdotto": "Pomodori",
+                                            "codice": "0004",
+                                            "quantita": 1,
+                                            "prezzo": 3.9900000000000002,
+                                            "udm": "kg"
+                                        },
+                                        {
+                                            "nomeProdotto": "Peperoni",
+                                            "codice": "0004",
+                                            "quantita": 1,
+                                            "prezzo": 4.99,
+                                            "udm": "kg"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "nomeFornitore": "L'agricoltore",
+                                    "via": "Via dei vigneti, 1",
+                                    "cap": "20100",
+                                    "citta": "Roma",
+                                    "prodotti": [
+                                        {
+                                            "nomeProdotto": "Mele",
+                                            "codice": "0004",
+                                            "quantita": 2,
+                                            "prezzo": 1.99,
+                                            "udm": "kg"
+                                        },
+                                        {
+                                            "nomeProdotto": "Pesche",
+                                            "codice": "0004",
+                                            "quantita": 3,
+                                            "prezzo": 0.97,
+                                            "udm": "kg"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "idCategoria": 3,
+                            "fornitori": [
+                                {
+                                    "nomeFornitore": "Il macellaio",
+                                    "via": "Via vai, 1",
+                                    "cap": "20100",
+                                    "citta": "Pavia",
+                                    "prodotti": [
+                                        {
+                                            "nomeProdotto": "Salsiccia",
+                                            "codice": "0004",
+                                            "quantita": 2,
+                                            "prezzo": 5,
+                                            "udm": "kg"
+                                        },
+                                        {
+                                            "nomeProdotto": "Petto di pollo",
+                                            "codice": "0004",
+                                            "quantita": 1,
+                                            "prezzo": 3,
+                                            "udm": "kg"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "nomeFornitore": "Dexter Morgan",
+                                    "via": "Via dei killer, 1",
+                                    "cap": "20100",
+                                    "citta": "Genova",
+                                    "prodotti": [
+                                        {
+                                            "nomeProdotto": "Braciola",
+                                            "codice": "0004",
+                                            "quantita": 2,
+                                            "prezzo": 6.99,
+                                            "udm": "kg"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "nomeMese": "Giugno",
+                    "categorie": [
+                        {
+                            "idCategoria": 4,
+                            "fornitori": [
+                                {
+                                    "nomeFornitore": "Il contadino",
+                                    "via": "Via della spiga, 1",
+                                    "cap": "20100",
+                                    "citta": "Milano",
+                                    "prodotti": [
+                                        {
+                                            "nomeProdotto": "Pomodori",
+                                            "codice": "0004",
+                                            "quantita": 3,
+                                            "prezzo": 3.99,
+                                            "udm": "kg"
+                                        },
+                                        {
+                                            "nomeProdotto": "Peperoni",
+                                            "codice": "0004",
+                                            "quantita": 5,
+                                            "prezzo": 4.99,
+                                            "udm": "kg"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "nomeFornitore": "L'agricoltore",
+                                    "via": "Via dei vigneti, 1",
+                                    "cap": "20100",
+                                    "citta": "Roma",
+                                    "prodotti": [
+                                        {
+                                            "nomeProdotto": "Mele",
+                                            "codice": "0004",
+                                            "quantita": 1,
+                                            "prezzo": 1.99,
+                                            "udm": "kg"
+                                        },
+                                        {
+                                            "nomeProdotto": "Pesche",
+                                            "codice": "0004",
+                                            "quantita": 2,
+                                            "prezzo": 0.97,
+                                            "udm": "kg"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "idCategoria": 1,
+                            "fornitori": [
+                                {
+                                    "nomeFornitore": "Il macellaio",
+                                    "via": "Via vai, 1",
+                                    "cap": "20100",
+                                    "citta": "Pavia",
+                                    "prodotti": [
+                                        {
+                                            "nomeProdotto": "Salsiccia",
+                                            "codice": "0004",
+                                            "quantita": 8,
+                                            "prezzo": 5,
+                                            "udm": "kg"
+                                        },
+                                        {
+                                            "nomeProdotto": "Petto di pollo",
+                                            "codice": "0004",
+                                            "quantita": 4,
+                                            "prezzo": 3,
+                                            "udm": "kg"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "nomeFornitore": "Dexter Morgan",
+                                    "via": "Via dei killer, 1",
+                                    "cap": "20100",
+                                    "citta": "Genova",
+                                    "prodotti": [
+                                        {
+                                            "nomeProdotto": "Braciola",
+                                            "codice": "0004",
+                                            "quantita": 2,
+                                            "prezzo": 6.99,
+                                            "udm": "kg"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

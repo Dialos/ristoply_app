@@ -1,9 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:graphic/graphic.dart';
 import 'package:intl/intl.dart';
-import 'package:ristoply_app/data/bar_data.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ristoply_app/widgets/statistiche/tabella_bar_chart.dart';
+import 'package:ristoply_app/data/dummy_data.dart';
 
 class BarChart extends StatefulWidget {
   const BarChart({super.key});
@@ -13,65 +15,181 @@ class BarChart extends StatefulWidget {
 }
 
 class _BarChartState extends State<BarChart> {
-  DateTime _selectedDate = DateTime(DateTime.now().year);
-  late String? dateToString;
+  final DateTime _selectedDate = DateTime(DateTime.now().year);
 
-  int currentYear = DateTime.now().year;
+  Map<String, dynamic> _items = {};
+  final List<int> _categorie = [];
+  final List _anni = [];
+  List _am = [];
+  List _mesi = [];
+  int selezionaAnno = 2023;
+  String? selezionaMese;
+  int? selezionaCat;
 
-  List<String> getYears(int year) {
-    List<String> dropYearList = [];
-    while (year <= currentYear) {
-      dropYearList.add(year.toString());
-      year++;
-    }
-    return dropYearList.reversed.toList();
+  @override
+  void initState() {
+    super.initState();
+    readJson();
   }
 
-  String? dropdownvalue;
-  var items = [
-    'Item 1',
-    'Item 2',
-    'Item 3',
-    'Item 4',
-    'Item 5',
-  ];
+  Future<void> readJson() async {
+    final String response =
+        await rootBundle.loadString('assets/assets_file/json_ristoply_v1.json');
+    final data = await jsonDecode(response);
+    setState(() {
+      _items = data;
+
+      for (var anno in _items['anni']) {
+        _anni.add(anno['nomeAnno']);
+      }
+
+      aggiornaCategorie(selezionaAnno);
+      _am = _items['anni'];
+    });
+  }
+
+  void aggiornaCategorie(int selezionaAnno) {
+    setState(() {
+      _categorie.clear();
+      _categorie.add(0);
+      Set<int> catSet = {};
+      for (var anno in _items['anni']) {
+        if (anno['nomeAnno'] == selezionaAnno) {
+          for (var mese in anno['mesi']) {
+            for (var categoria in mese['categorie']) {
+              catSet.add(categoria['idCategoria']);
+            }
+          }
+        }
+      }
+      _categorie.addAll(catSet);
+    });
+  }
+
+  List<DataRow> _createRows() {
+    List<DataRow> row = [];
+
+    for (var anno in _items['anni'] ?? []) {
+      if (anno['nomeAnno'] == selezionaAnno) {
+        for (var mese in anno['mesi']) {
+          double spesaMeseTotale = 0;
+          for (var categoria in mese['categorie']) {
+            if (selezionaCat == 0 ||
+                selezionaCat == null ||
+                categoria['idCategoria'] == selezionaCat) {
+              for (var fornitore in categoria['fornitori']) {
+                for (var prodotto in fornitore['prodotti']) {
+                  spesaMeseTotale += prodotto['quantita'] * prodotto['prezzo'];
+                }
+              }
+            }
+          }
+          if (spesaMeseTotale > 0) {
+            row.add(
+              DataRow(cells: [
+                DataCell(Text(mese['nomeMese'])),
+                DataCell(Text('€${spesaMeseTotale.toStringAsFixed(2)}')),
+              ]),
+            );
+          }
+        }
+      }
+    }
+    return row;
+  }
+
+  String _getNomeCat(int selezionaCat) {
+    return availableCategories
+        .firstWhere((categoria) => categoria.id == selezionaCat)
+        .nome;
+  }
+
+  List<Map<String, Object>> newJson() {
+    List<Map<String, Object>> newData = [];
+
+    for (var anno in _items['anni'] ?? []) {
+      if (anno['nomeAnno'] == selezionaAnno) {
+        for (var mese in anno['mesi']) {
+          double spesaMeseTotale = 0;
+          for (var categoria in mese['categorie']) {
+            if (selezionaCat == 0 ||
+                selezionaCat == null ||
+                categoria['idCategoria'] == selezionaCat) {
+              for (var fornitore in categoria['fornitori']) {
+                for (var prodotto in fornitore['prodotti']) {
+                  spesaMeseTotale += prodotto['quantita'] * prodotto['prezzo'];
+                }
+              }
+            }
+          }
+          if (spesaMeseTotale > 0) {
+            newData.add({
+              'mese': mese['nomeMese'],
+              'anno': anno['nomeAnno'],
+              'spesa': spesaMeseTotale
+            });
+          }
+        }
+      }
+    }
+    return newData;
+  }
 
   @override
   Widget build(BuildContext context) {
+    List<Map<String, Object>> newJsonData = newJson();
+
     return Scaffold(
       appBar: AppBar(
         actions: [
-          IconButton(
-            onPressed: () async => _onPressed(context: context),
-            icon: DropdownButton(
-              value: null,
-              hint: Text(
-                DateFormat.y('it').format(_selectedDate).toString(),
-                style: GoogleFonts.getFont(
-                  'DM Sans',
-                  textStyle: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  ),
+// Dropdown anno
+          DropdownButton<int>(
+            value: selezionaAnno,
+            hint: Text(
+              DateFormat.y('it').format(_selectedDate).toString(),
+              style: GoogleFonts.getFont(
+                'DM Sans',
+                textStyle: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
-              icon: const Icon(Icons.keyboard_arrow_down_outlined),
-              items: getYears(2020).map((element) {
-                return DropdownMenuItem(
-                  value: element,
-                  child: Text(element),
-                );
-              }).toList(),
-              onChanged: (newValue) {
-                setState(() {
-                  dateToString = newValue;
-                });
-              },
             ),
+            onChanged: (newValue) {
+              setState(
+                () {
+                  selezionaAnno = newValue!;
+                  selezionaCat = null;
+                  _mesi = _am.firstWhere(
+                      (anno) => anno['nomeAnno'] == newValue)['mesi'];
+                },
+              );
+              aggiornaCategorie(newValue!);
+            },
+            items: _anni.map(
+              (anno) {
+                return DropdownMenuItem<int>(
+                  value: anno,
+                  child: Text(
+                    anno.toString(),
+                    style: GoogleFonts.getFont(
+                      'DM Sans',
+                      textStyle: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 17,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ).toList(),
           ),
         ],
       ),
+
+// Dropdown Caregorie
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -92,8 +210,8 @@ class _BarChartState extends State<BarChart> {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 25.0),
-              child: DropdownButton(
-                value: null,
+              child: DropdownButton<int>(
+                value: selezionaCat,
                 hint: Text(
                   "Spesa totale",
                   style: GoogleFonts.getFont(
@@ -105,12 +223,11 @@ class _BarChartState extends State<BarChart> {
                     ),
                   ),
                 ),
-                icon: const Icon(Icons.keyboard_arrow_down),
-                items: items.map((String items) {
-                  return DropdownMenuItem(
-                    value: items,
+                items: _categorie.map((categoria) {
+                  return DropdownMenuItem<int>(
+                    value: categoria,
                     child: Text(
-                      items,
+                      _getNomeCat(categoria),
                       style: GoogleFonts.getFont(
                         'DM Sans',
                         textStyle: const TextStyle(
@@ -125,7 +242,7 @@ class _BarChartState extends State<BarChart> {
                 onChanged: (newValue) {
                   setState(
                     () {
-                      dropdownvalue = newValue;
+                      selezionaCat = newValue!;
                     },
                   );
                 },
@@ -134,18 +251,20 @@ class _BarChartState extends State<BarChart> {
             const SizedBox(
               height: 10,
             ),
+
+// Bar Chart
             Container(
               padding: const EdgeInsets.only(left: 10, right: 10),
               width: MediaQuery.of(context).size.width * 1,
               height: MediaQuery.of(context).size.width * 0.7,
               child: Chart(
-                data: barData,
+                data: newJsonData,
                 variables: {
-                  'month': Variable(
-                    accessor: (Map map) => map['month'] as String,
+                  'mese': Variable(
+                    accessor: (Map map) => map['mese'] as String,
                   ),
-                  'sold': Variable(
-                    accessor: (Map map) => map['sold'] as num,
+                  'spesa': Variable(
+                    accessor: (Map map) => map['spesa'] as num,
                   ),
                 },
                 marks: [
@@ -203,35 +322,65 @@ class _BarChartState extends State<BarChart> {
             const SizedBox(
               height: 20,
             ),
-            Container(
-              padding: const EdgeInsets.only(left: 20, right: 20),
-              width: MediaQuery.of(context).size.width * 1,
-              child: BarDataTable()),
+
+//  BarDataTable(),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Container(
+                  padding: const EdgeInsets.only(left: 24, right: 24),
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(15)),
+                  child: DataTable(
+                    headingRowColor: WidgetStateProperty.resolveWith(
+                        (states) => const Color.fromRGBO(246, 246, 247, 1)),
+                    border: TableBorder.all(
+                      width: 3.0,
+                      borderRadius: BorderRadius.circular(20),
+                      color: const Color.fromRGBO(246, 246, 247, 1),
+                    ),
+                    columns: [
+                      DataColumn(
+                        label: Expanded(
+                          child: Text(
+                            textAlign: TextAlign.center,
+                            'Mesi',
+                            style: GoogleFonts.getFont(
+                              'DM Sans',
+                              textStyle: const TextStyle(
+                                color: Color.fromRGBO(1, 0, 13, 1),
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      DataColumn(
+                        label: Expanded(
+                          child: Text(
+                            textAlign: TextAlign.center,
+                            'Importi',
+                            style: GoogleFonts.getFont(
+                              'DM Sans',
+                              textStyle: const TextStyle(
+                                color: Color.fromRGBO(1, 0, 13, 1),
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                    rows: _createRows(),
+                  ),
+                ),
+              ],
+            )
           ],
         ),
       ),
     );
-  }
-
-  Future<void> _onPressed({required BuildContext context}) async {
-    final now = DateTime.now();
-    final firstDate = DateTime(now.year);
-
-    DateTime? pickedDate = await showDatePicker(
-      context: context,
-      //     locale: const Locale('it'),
-      initialDate: now,
-      firstDate: DateTime(2000), // quanto voglio andare indietro
-      lastDate: firstDate,
-      // helpText: 'Seleziona una data',
-      // cancelText: 'Chiudi',
-    );
-
-    if (pickedDate != null) {
-      setState(() {
-        _selectedDate = pickedDate;
-        dateToString = _selectedDate.toString();
-      });
-    }
   }
 }

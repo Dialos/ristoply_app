@@ -14,7 +14,7 @@ class PieChart extends StatelessWidget {
                       color: Colors.white,
                     ),
       margin: const EdgeInsets.only(top: 10),
-      width: 350,
+    //  width: 350,
       height: 350,
       child: Chart(
         data: pieData,
