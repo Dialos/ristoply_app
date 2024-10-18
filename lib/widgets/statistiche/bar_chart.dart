@@ -15,14 +15,15 @@ class BarChart extends StatefulWidget {
 }
 
 class _BarChartState extends State<BarChart> {
-  final DateTime _selectedDate = DateTime(DateTime.now().year);
+  final DateTime _selectedDate = DateTime.now();
 
+  late Future<List<Map<String, Object>>>? newFutureJsonData;
   Map<String, dynamic> _items = {};
-  final List<int> _categorie = [];
-  final List _anni = [];
+  List<int> _categorie = [];
+  List _anni = [];
   List _am = [];
   List _mesi = [];
-  int selezionaAnno = 2023;
+  int selezionaAnno = DateTime.now().year;
   String? selezionaMese;
   int? selezionaCat;
 
@@ -30,6 +31,7 @@ class _BarChartState extends State<BarChart> {
   void initState() {
     super.initState();
     readJson();
+    newFutureJsonData = newJson();
   }
 
   Future<void> readJson() async {
@@ -45,6 +47,8 @@ class _BarChartState extends State<BarChart> {
 
       aggiornaCategorie(selezionaAnno);
       _am = _items['anni'];
+
+      newFutureJsonData = newJson();
     });
   }
 
@@ -52,17 +56,17 @@ class _BarChartState extends State<BarChart> {
     setState(() {
       _categorie.clear();
       _categorie.add(0);
-      Set<int> catSet = {};
+      Set<int> _catSet = {};
       for (var anno in _items['anni']) {
         if (anno['nomeAnno'] == selezionaAnno) {
           for (var mese in anno['mesi']) {
             for (var categoria in mese['categorie']) {
-              catSet.add(categoria['idCategoria']);
+              _catSet.add(categoria['idCategoria']);
             }
           }
         }
       }
-      _categorie.addAll(catSet);
+      _categorie.addAll(_catSet);
     });
   }
 
@@ -87,8 +91,32 @@ class _BarChartState extends State<BarChart> {
           if (spesaMeseTotale > 0) {
             row.add(
               DataRow(cells: [
-                DataCell(Text(mese['nomeMese'])),
-                DataCell(Text('€${spesaMeseTotale.toStringAsFixed(2)}')),
+                DataCell(
+                  Text(
+                    mese['nomeMese'],
+                    style: GoogleFonts.getFont(
+                      'DM Sans',
+                      textStyle: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ),
+                DataCell(
+                  Text(
+                    '€${spesaMeseTotale.toStringAsFixed(2)}',
+                    style: GoogleFonts.getFont(
+                      'DM Sans',
+                      textStyle: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ),
               ]),
             );
           }
@@ -104,7 +132,7 @@ class _BarChartState extends State<BarChart> {
         .nome;
   }
 
-  List<Map<String, Object>> newJson() {
+  Future<List<Map<String, Object>>> newJson() async {
     List<Map<String, Object>> newData = [];
 
     for (var anno in _items['anni'] ?? []) {
@@ -125,8 +153,7 @@ class _BarChartState extends State<BarChart> {
           if (spesaMeseTotale > 0) {
             newData.add({
               'mese': mese['nomeMese'],
-              'anno': anno['nomeAnno'],
-              'spesa': spesaMeseTotale
+              'spesa': spesaMeseTotale.toPrecision(1)
             });
           }
         }
@@ -137,8 +164,6 @@ class _BarChartState extends State<BarChart> {
 
   @override
   Widget build(BuildContext context) {
-    List<Map<String, Object>> newJsonData = newJson();
-
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -163,6 +188,7 @@ class _BarChartState extends State<BarChart> {
                   selezionaCat = null;
                   _mesi = _am.firstWhere(
                       (anno) => anno['nomeAnno'] == newValue)['mesi'];
+                  newFutureJsonData = newJson();
                 },
               );
               aggiornaCategorie(newValue!);
@@ -243,6 +269,7 @@ class _BarChartState extends State<BarChart> {
                   setState(
                     () {
                       selezionaCat = newValue!;
+                      newFutureJsonData = newJson();
                     },
                   );
                 },
@@ -257,66 +284,86 @@ class _BarChartState extends State<BarChart> {
               padding: const EdgeInsets.only(left: 10, right: 10),
               width: MediaQuery.of(context).size.width * 1,
               height: MediaQuery.of(context).size.width * 0.7,
-              child: Chart(
-                data: newJsonData,
-                variables: {
-                  'mese': Variable(
-                    accessor: (Map map) => map['mese'] as String,
-                  ),
-                  'spesa': Variable(
-                    accessor: (Map map) => map['spesa'] as num,
-                  ),
-                },
-                marks: [
-                  IntervalMark(
-                    // label: LabelEncode(
-                    //     encoder: (tuple) => Label(tuple['sold'].toString())),
-                    elevation: ElevationEncode(value: 0, updaters: {
-                      'tap': {true: (_) => 5}
-                    }),
-                    gradient: GradientEncode(
-                        value: const LinearGradient(
-                          colors: [
-                            Color.fromRGBO(170, 245, 233, 0.675),
-                            Color.fromRGBO(0, 173, 143, 1)
-                          ],
-                          begin: Alignment.bottomCenter,
-                          end: Alignment.topCenter,
+              child: FutureBuilder<List<Map<String, Object>>>(
+                future: newFutureJsonData,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (snapshot.hasError) {
+                    return Center(
+                      child: Text("Errore nel caricamento dei dati"),
+                    );
+                  } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                    return Center(
+                      child: Text("Nessun dato disponibile"),
+                    );
+                  } else {
+                    var newJsonData = snapshot.data!;
+                    return Chart(
+                      data: newJsonData,
+                      variables: {
+                        'mese': Variable(
+                          accessor: (Map map) => map['mese'] as String,
                         ),
-                        updaters: {
-                          'tap': {
-                            true: (color) => const LinearGradient(
-                                  colors: [
-                                    Color.fromRGBO(39, 117, 104, 1),
-                                    Color.fromRGBO(6, 67, 57, 0.675),
-                                  ],
-                                  begin: Alignment.bottomCenter,
-                                  end: Alignment.topCenter,
-                                )
-                          }
-                        }),
-                  )
-                ],
-                axes: [
-                  Defaults.horizontalAxis,
-                  //   Defaults.verticalAxis,
-                  AxisGuide(
-                    label: LabelStyle(
-                      textStyle: const TextStyle(
-                        fontSize: 10,
-                        color: Color(0xff808080),
-                      ),
-                      offset: const Offset(-7.5, 0),
-                    ),
-                    grid: PaintStyle(
-                      strokeColor: const Color(0xffe8e8e8),
-                      strokeWidth: 1,
-                    ),
-                  )
-                ],
-                selections: {'tap': PointSelection(dim: Dim.x)},
-                tooltip: TooltipGuide(),
-                crosshair: CrosshairGuide(),
+                        'spesa': Variable(
+                          accessor: (Map map) => map['spesa'] as num,
+                        ),
+                      },
+                      marks: [
+                        IntervalMark(
+                          // label: LabelEncode(
+                          //     encoder: (tuple) => Label(tuple['spesa'].toString())),
+                          elevation: ElevationEncode(value: 0, updaters: {
+                            'tap': {true: (_) => 5}
+                          }),
+                          gradient: GradientEncode(
+                              value: const LinearGradient(
+                                colors: [
+                                  Color.fromRGBO(170, 245, 233, 0.675),
+                                  Color.fromRGBO(0, 173, 143, 1)
+                                ],
+                                begin: Alignment.bottomCenter,
+                                end: Alignment.topCenter,
+                              ),
+                              updaters: {
+                                'tap': {
+                                  true: (color) => const LinearGradient(
+                                        colors: [
+                                          Color.fromRGBO(39, 117, 104, 1),
+                                          Color.fromRGBO(6, 67, 57, 0.675),
+                                        ],
+                                        begin: Alignment.bottomCenter,
+                                        end: Alignment.topCenter,
+                                      )
+                                }
+                              }),
+                        )
+                      ],
+                      axes: [
+                        Defaults.horizontalAxis,
+                        // Defaults.verticalAxis,
+                        AxisGuide(
+                          label: LabelStyle(
+                            textStyle: const TextStyle(
+                              fontSize: 10,
+                              color: Color(0xff808080),
+                            ),
+                            offset: const Offset(-0.75, 0),
+                          ),
+                          grid: PaintStyle(
+                            strokeColor: const Color(0xffe8e8e8),
+                            strokeWidth: 1,
+                          ),
+                        )
+                      ],
+                      selections: {'tap': PointSelection(dim: Dim.x)},
+                      tooltip: TooltipGuide(),
+                      crosshair: CrosshairGuide(),
+                    );
+                  }
+                },
               ),
             ),
             const SizedBox(
@@ -330,7 +377,7 @@ class _BarChartState extends State<BarChart> {
                 Container(
                   padding: const EdgeInsets.only(left: 24, right: 24),
                   decoration:
-                      BoxDecoration(borderRadius: BorderRadius.circular(15)),
+                      BoxDecoration(borderRadius: BorderRadius.circular(10)),
                   child: DataTable(
                     headingRowColor: WidgetStateProperty.resolveWith(
                         (states) => const Color.fromRGBO(246, 246, 247, 1)),
@@ -382,5 +429,11 @@ class _BarChartState extends State<BarChart> {
         ),
       ),
     );
+  }
+}
+
+extension NumberRounding on num {
+  num toPrecision(int precision) {
+    return num.parse((this).toStringAsFixed(precision));
   }
 }

@@ -18,14 +18,14 @@
                                         {
                                             "nomeProdotto": "Pomodori",
                                             "codice": "0004",
-                                            "quantita": 1,
+                                            "quantita": 34,
                                             "prezzo": 3.99,
                                             "udm": "kg"
                                         },
                                         {
                                             "nomeProdotto": "Peperoni",
                                             "codice": "0004",
-                                            "quantita": 1,
+                                            "quantita": 75,
                                             "prezzo": 4.99,
                                             "udm": "kg"
                                         }
@@ -40,14 +40,14 @@
                                         {
                                             "nomeProdotto": "Mele",
                                             "codice": "0004",
-                                            "quantita": 2,
+                                            "quantita": 25,
                                             "prezzo": 1.99,
                                             "udm": "kg"
                                         },
                                         {
                                             "nomeProdotto": "Pesche",
                                             "codice": "0004",
-                                            "quantita": 3,
+                                            "quantita": 75,
                                             "prezzo": 0.97,
                                             "udm": "kg"
                                         }
@@ -67,14 +67,14 @@
                                         {
                                             "nomeProdotto": "Salsiccia",
                                             "codice": "0004",
-                                            "quantita": 2,
+                                            "quantita": 36,
                                             "prezzo": 15,
                                             "udm": "kg"
                                         },
                                         {
                                             "nomeProdotto": "Petto di pollo",
                                             "codice": "0004",
-                                            "quantita": 1,
+                                            "quantita": 84,
                                             "prezzo": 8,
                                             "udm": "kg"
                                         }
@@ -89,7 +89,7 @@
                                         {
                                             "nomeProdotto": "Braciola",
                                             "codice": "0004",
-                                            "quantita": 2,
+                                            "quantita": 26,
                                             "prezzo": 6.99,
                                             "udm": "kg"
                                         }
@@ -114,14 +114,14 @@
                                         {
                                             "nomeProdotto": "Pomodori",
                                             "codice": "0004",
-                                            "quantita": 3,
+                                            "quantita": 85,
                                             "prezzo": 6.99,
                                             "udm": "kg"
                                         },
                                         {
                                             "nomeProdotto": "Peperoni",
                                             "codice": "0004",
-                                            "quantita": 5,
+                                            "quantita": 27,
                                             "prezzo": 12.99,
                                             "udm": "kg"
                                         }
@@ -136,14 +136,14 @@
                                         {
                                             "nomeProdotto": "Mele",
                                             "codice": "0004",
-                                            "quantita": 1,
+                                            "quantita": 76,
                                             "prezzo": 1.99,
                                             "udm": "kg"
                                         },
                                         {
                                             "nomeProdotto": "Pesche",
                                             "codice": "0004",
-                                            "quantita": 2,
+                                            "quantita": 437,
                                             "prezzo": 0.97,
                                             "udm": "kg"
                                         }
@@ -163,14 +163,14 @@
                                         {
                                             "nomeProdotto": "Salsiccia",
                                             "codice": "0004",
-                                            "quantita": 8,
+                                            "quantita": 33,
                                             "prezzo": 25,
                                             "udm": "kg"
                                         },
                                         {
                                             "nomeProdotto": "Petto di pollo",
                                             "codice": "0004",
-                                            "quantita": 4,
+                                            "quantita":674,
                                             "prezzo": 18,
                                             "udm": "kg"
                                         }
@@ -185,7 +185,7 @@
                                         {
                                             "nomeProdotto": "Braciola",
                                             "codice": "0004",
-                                            "quantita": 2,
+                                            "quantita": 43,
                                             "prezzo": 6.99,
                                             "udm": "kg"
                                         }
@@ -215,14 +215,14 @@
                                         {
                                             "nomeProdotto": "Pomodori",
                                             "codice": "0004",
-                                            "quantita": 1,
-                                            "prezzo": 3.9900000000000002,
+                                            "quantita": 274,
+                                            "prezzo": 3.99,
                                             "udm": "kg"
                                         },
                                         {
                                             "nomeProdotto": "Peperoni",
                                             "codice": "0004",
-                                            "quantita": 1,
+                                            "quantita": 57,
                                             "prezzo": 4.99,
                                             "udm": "kg"
                                         }
@@ -237,14 +237,14 @@
                                         {
                                             "nomeProdotto": "Mele",
                                             "codice": "0004",
-                                            "quantita": 2,
+                                            "quantita": 45,
                                             "prezzo": 1.99,
                                             "udm": "kg"
                                         },
                                         {
                                             "nomeProdotto": "Pesche",
                                             "codice": "0004",
-                                            "quantita": 3,
+                                            "quantita": 247,
                                             "prezzo": 0.97,
                                             "udm": "kg"
                                         }
@@ -264,14 +264,14 @@
                                         {
                                             "nomeProdotto": "Salsiccia",
                                             "codice": "0004",
-                                            "quantita": 2,
+                                            "quantita": 421,
                                             "prezzo": 5,
                                             "udm": "kg"
                                         },
                                         {
                                             "nomeProdotto": "Petto di pollo",
                                             "codice": "0004",
-                                            "quantita": 1,
+                                            "quantita": 48,
                                             "prezzo": 3,
                                             "udm": "kg"
                                         }
@@ -286,7 +286,7 @@
                                         {
                                             "nomeProdotto": "Braciola",
                                             "codice": "0004",
-                                            "quantita": 2,
+                                            "quantita": 56,
                                             "prezzo": 6.99,
                                             "udm": "kg"
                                         }
@@ -311,14 +311,14 @@
                                         {
                                             "nomeProdotto": "Pomodori",
                                             "codice": "0004",
-                                            "quantita": 3,
+                                            "quantita": 356,
                                             "prezzo": 3.99,
                                             "udm": "kg"
                                         },
                                         {
                                             "nomeProdotto": "Peperoni",
                                             "codice": "0004",
-                                            "quantita": 5,
+                                            "quantita": 68,
                                             "prezzo": 4.99,
                                             "udm": "kg"
                                         }
@@ -333,14 +333,14 @@
                                         {
                                             "nomeProdotto": "Mele",
                                             "codice": "0004",
-                                            "quantita": 1,
+                                            "quantita": 568,
                                             "prezzo": 1.99,
                                             "udm": "kg"
                                         },
                                         {
                                             "nomeProdotto": "Pesche",
                                             "codice": "0004",
-                                            "quantita": 2,
+                                            "quantita": 245,
                                             "prezzo": 0.97,
                                             "udm": "kg"
                                         }
@@ -360,14 +360,14 @@
                                         {
                                             "nomeProdotto": "Salsiccia",
                                             "codice": "0004",
-                                            "quantita": 8,
+                                            "quantita": 45,
                                             "prezzo": 5,
                                             "udm": "kg"
                                         },
                                         {
                                             "nomeProdotto": "Petto di pollo",
                                             "codice": "0004",
-                                            "quantita": 4,
+                                            "quantita": 247,
                                             "prezzo": 3,
                                             "udm": "kg"
                                         }
@@ -382,7 +382,7 @@
                                         {
                                             "nomeProdotto": "Braciola",
                                             "codice": "0004",
-                                            "quantita": 2,
+                                            "quantita": 745,
                                             "prezzo": 6.99,
                                             "udm": "kg"
                                         }
