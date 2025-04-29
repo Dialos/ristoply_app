@@ -56,7 +56,7 @@ class _SplashScreenState extends State<SplashScreen>
             RotationTransition(
               turns: _animation,
               child: Image.asset(
-                'assets_images/logo_ristoply.png',
+                'assets/assets_images/logo_ristoply.png',
                 width: MediaQuery.of(context).size.width * 2,
               ),
             )

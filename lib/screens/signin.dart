@@ -9,15 +9,17 @@ class Signin extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-        Container(
-          alignment: Alignment.topCenter,
-          width: MediaQuery.of(context).size.width,
-          height: 297,
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage('assets_images/signin_background.png'),
-                fit: BoxFit.cover),
-          ),),
+          Container(
+            alignment: Alignment.topCenter,
+            width: MediaQuery.of(context).size.width,
+            height: 297,
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image:
+                      AssetImage('assets/assets_images/signin_background.png'),
+                  fit: BoxFit.cover),
+            ),
+          ),
           Container(
             padding: const EdgeInsets.only(top: 200),
             child: const Column(

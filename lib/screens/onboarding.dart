@@ -85,7 +85,7 @@ class _OnboardScreenState extends State<OnboardScreen> {
                     Expanded(
                       child: Center(
                         child: Image.asset(
-                          'assets_images/onboarding1.png',
+                          'assets/assets_images/onboarding1.png',
                           width: MediaQuery.of(context).size.width * 2,
                         ),
                       ),
@@ -125,7 +125,7 @@ class _OnboardScreenState extends State<OnboardScreen> {
                     Expanded(
                       child: Center(
                         child: Image.asset(
-                          'assets_images/onboarding2.png',
+                          'assets/assets_images/onboarding2.png',
                           width: MediaQuery.of(context).size.width * 2,
                         ),
                       ),
@@ -165,7 +165,7 @@ class _OnboardScreenState extends State<OnboardScreen> {
                     Expanded(
                       child: Center(
                         child: Image.asset(
-                          'assets_images/onboarding3.png',
+                          'assets/assets_images/onboarding3.png',
                           width: MediaQuery.of(context).size.width * 2,
                         ),
                       ),

@@ -13,7 +13,11 @@ class PasswordLost extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         mini: true,
         backgroundColor: const Color.fromRGBO(0, 0, 0, 0.5),
-        child: const Icon(Icons.arrow_back, color: Colors.white, size: 27,),
+        child: const Icon(
+          Icons.arrow_back,
+          color: Colors.white,
+          size: 27,
+        ),
         onPressed: () {
           Navigator.push(
             context,
@@ -30,7 +34,8 @@ class PasswordLost extends StatelessWidget {
             height: 297,
             decoration: const BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage('assets_images/recovery_background.jpeg'),
+                  image: AssetImage(
+                      'assets/assets_images/recovery_background.jpeg'),
                   fit: BoxFit.cover),
             ),
           ),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:ristoply_app/screens/splash_screen.dart';
-import 'package:ristoply_app/screens/statistiche.dart';
 
 void main() {
   runApp(const MyApp());
@@ -34,8 +33,7 @@ class MyApp extends StatelessWidget {
         Locale('en'),
         Locale('it'),
       ],
-     // home: const SplashScreen(),
-      home: const Statistiche(),
+      home: const SplashScreen(),
     );
   }
 }

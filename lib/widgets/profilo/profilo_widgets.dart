@@ -30,7 +30,7 @@ class ProfiloWidgets extends StatelessWidget {
                 child: Row(
                   children: [
                     Image.asset(
-                      'assets_images/chef.png',
+                      'assets/assets_images/chef.png',
                       width: 74,
                       height: 102.02,
                     ),
