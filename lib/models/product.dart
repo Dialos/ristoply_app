@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
 class Prodotto {
-  const Prodotto(
-    {
+  const Prodotto({
     required this.nomeProdotto,
     required this.codice,
-    this.prezzo = '', 
+    this.prezzo = '',
   });
 
   final String nomeProdotto;
@@ -54,9 +53,8 @@ class Categoria {
 }
 
 class Spese {
-
-
-
-final Categoria categoria;
+  final Categoria categoria;
   final List<Fornitore> fornitore;
+
+  Spese({required this.categoria, required this.fornitore});
 }

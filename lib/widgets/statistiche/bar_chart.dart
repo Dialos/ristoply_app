@@ -3,7 +3,6 @@ import 'package:graphic/graphic.dart';
 import 'package:ristoply_app/data/bar_data.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
 class BarChart extends StatefulWidget {
   const BarChart({super.key});
 
@@ -29,8 +28,6 @@ class _BarChartState extends State<BarChart> {
     });
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,16 +36,20 @@ class _BarChartState extends State<BarChart> {
           IconButton(
             onPressed: _presentDatePicker,
             icon: DropdownButton(
-              value: dropMenuDate, 
-              icon: const Icon(Icons.keyboard_arrow_down_outlined), 
+              value: dropMenuDate,
+              icon: const Icon(Icons.keyboard_arrow_down_outlined),
               items: barData.map((element) {
-                return DropdownMenuItem(value: element, child: Text(element.toString()),);
+                return DropdownMenuItem(
+                  value: element,
+                  child: Text(element.toString()),
+                );
               }).toList(),
-              onChanged: (newValue) {
+              onChanged: <String>(newValue) {
                 setState(() {
                   dropMenuDate = newValue;
                 });
-              },),
+              },
+            ),
           ),
         ],
       ),
